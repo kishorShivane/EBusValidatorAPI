@@ -1,0 +1,1 @@
+2019-08-04 17:24:43.3691 ERROR LINQ to Entities does not recognize the method 'System.String ToShortDateString()' method, and this method cannot be translated into a store expression.

@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBusValidator.API", "EBusValidator.API\EBusValidator.API.csproj", "{953D812E-DBAD-4182-808C-1D1581503365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBusValidator.DataProvider", "EBusValidator.DataProvider\EBusValidator.DataProvider.csproj", "{9E8DC0E6-B6C8-4D35-BB8F-E4E0CECCBC23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBusValidator.Logger", "EBusValidator.Logger\EBusValidator.Logger.csproj", "{35FC9212-61E3-437C-BEA0-06469C425348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBusValidator.Models", "EBusValidator.Models\EBusValidator.Models.csproj", "{2F0475CF-ABE3-41F3-9CB1-FAC192D55A63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EBusValidator.Core", "EBusValidator.Core\EBusValidator.Core.csproj", "{4A50D9F5-066E-446E-92AD-0C239567CAD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{953D812E-DBAD-4182-808C-1D1581503365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953D812E-DBAD-4182-808C-1D1581503365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953D812E-DBAD-4182-808C-1D1581503365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953D812E-DBAD-4182-808C-1D1581503365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E8DC0E6-B6C8-4D35-BB8F-E4E0CECCBC23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E8DC0E6-B6C8-4D35-BB8F-E4E0CECCBC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E8DC0E6-B6C8-4D35-BB8F-E4E0CECCBC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E8DC0E6-B6C8-4D35-BB8F-E4E0CECCBC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FC9212-61E3-437C-BEA0-06469C425348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FC9212-61E3-437C-BEA0-06469C425348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FC9212-61E3-437C-BEA0-06469C425348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FC9212-61E3-437C-BEA0-06469C425348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F0475CF-ABE3-41F3-9CB1-FAC192D55A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0475CF-ABE3-41F3-9CB1-FAC192D55A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0475CF-ABE3-41F3-9CB1-FAC192D55A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0475CF-ABE3-41F3-9CB1-FAC192D55A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A50D9F5-066E-446E-92AD-0C239567CAD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A50D9F5-066E-446E-92AD-0C239567CAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A50D9F5-066E-446E-92AD-0C239567CAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A50D9F5-066E-446E-92AD-0C239567CAD8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {E731206B-78B8-4EB6-90AF-42EAFA267A29}
+	EndGlobalSection
+EndGlobal

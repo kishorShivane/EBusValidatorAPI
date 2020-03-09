@@ -1,0 +1,4 @@
+2019-07-18 23:36:02.7898 ERROR Schema specified is not valid. Errors: 
+EBusValidatorContext.ssdl(2,2) : error 0152: No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+2019-07-18 23:39:54.2328 ERROR Schema specified is not valid. Errors: 
+EBusValidatorContext.ssdl(2,2) : error 0152: No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
