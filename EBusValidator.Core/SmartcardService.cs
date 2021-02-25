@@ -33,18 +33,18 @@ namespace EBusValidator.Core
             {
                 return smartCardRepo.GetAll().Select(x => new SmartcardModel()
                 {
-                    CellPhone = x.Cellphone,                    
-                    EMail = x.EmailAddress,
-                    Gender = x.Gender,
+                    CellPhone = x.Cellphone ?? string.Empty,
+                    EMail = x.EmailAddress ?? string.Empty,
+                    Gender = x.Gender ?? string.Empty,
                     ID = x.ID,
-                    LastUpdatedBy = x.LastUpdatedBy,
+                    LastUpdatedBy = x.LastUpdatedBy ?? string.Empty,
                     LastUpdatedDate = x.LastUpdatedDate ?? DateTime.Now,
-                    Name = x.Name,
-                    SmartcardNumber = x.SmartcardNumber,
-                    Status = x.Status?? true,
-                    Surname = x.Surname,
-                    CardType = x.CardType,
-                    Number = x.Number
+                    Name = x.Name ?? string.Empty,
+                    SmartcardNumber = x.SmartcardNumber ?? string.Empty,
+                    Status = x.Status ?? true,
+                    Surname = x.Surname ?? string.Empty,
+                    CardType = x.CardType ?? string.Empty,
+                    Number = x.Number ?? string.Empty
                 }).ToList();
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace EBusValidator.Core
 
         public SmartcardModel GetSmartCard(int smartcardID)
         {
-            SmartcardModel smartCardModel = null;    
+            SmartcardModel smartCardModel = null;
             try
             {
                 var smartCard = smartCardRepo.GetById(smartcardID);
@@ -83,12 +83,12 @@ namespace EBusValidator.Core
                 {
                     if (smartCardRepo.GetByCardNumber(smartcard.SmartcardNumber) == null)
                     {
-                        Smartcard entity = MapSmartCardDBModel(smartcard);                        
+                        Smartcard entity = MapSmartCardDBModel(smartcard);
                         smartCardRepo.Insert(entity);
                         unitOfWork.Save();
                         var guardians = MapGuardianDBModel(smartcard.Guardians, entity.ID);
                         guardianRepo.BulkInsert(guardians);
-                        unitOfWork.Save();                        
+                        unitOfWork.Save();
                     }
                     else
                     {
@@ -119,8 +119,10 @@ namespace EBusValidator.Core
         private List<SmartcardGuardian> MapGuardianDBModel(List<GuardianModel> guardians, int smartCardID)
         {
             var result = new List<SmartcardGuardian>();
-            guardians.ForEach(x=> {
-                result.Add(new SmartcardGuardian() {
+            guardians.ForEach(x =>
+            {
+                result.Add(new SmartcardGuardian()
+                {
                     Name = x.Name,
                     Surname = x.Surname,
                     RelationShip = x.RelationShip,
@@ -128,8 +130,8 @@ namespace EBusValidator.Core
                     Telephone = x.TelePhone,
                     Email = x.EMail,
                     SmartCardID = smartCardID,
-                   LastUpdateBy = "System",
-                   LastUpdateOn = DateTime.Now
+                    LastUpdateBy = "System",
+                    LastUpdateOn = DateTime.Now
                 });
             });
             return result;
@@ -139,7 +141,7 @@ namespace EBusValidator.Core
         {
             return new Smartcard()
             {
-                Cellphone = x.CellPhone,               
+                Cellphone = x.CellPhone,
                 EmailAddress = x.EMail,
                 Gender = x.Gender,
                 ID = x.ID,
@@ -182,7 +184,7 @@ namespace EBusValidator.Core
                 LastUpdatedDate = x.LastUpdatedDate ?? DateTime.Now,
                 Name = x.Name,
                 SmartcardNumber = x.SmartcardNumber,
-                Status = x.Status?? true,
+                Status = x.Status ?? true,
                 Surname = x.Surname,
                 CardType = x.CardType,
                 Number = x.Number
@@ -194,8 +196,10 @@ namespace EBusValidator.Core
             var result = new List<GuardianModel>();
             if (guardians.Any())
             {
-                guardians.ForEach(x=> {
-                    result.Add(new GuardianModel() {
+                guardians.ForEach(x =>
+                {
+                    result.Add(new GuardianModel()
+                    {
                         ID = x.ID,
                         Name = x.Name,
                         Surname = x.Surname,
