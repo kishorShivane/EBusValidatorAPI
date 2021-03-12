@@ -8,6 +8,8 @@ namespace EBusValidator.Models
 {
     public class UsageHistoryModel
     {
+        public string SurName { get; set; }
+        public string FirstName { get; set; }
         public string Smartcard { get; set; }
         public int Action { get; set; }
         public string ActivityType { get; set; }

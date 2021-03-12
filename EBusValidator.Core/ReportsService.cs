@@ -89,7 +89,7 @@ namespace EBusValidator.Core
                     usageSummaryList.Add(new UsageSummaryModel()
                     {
                         FirstName = firstItem.FirstName,
-                        Smartcard = firstItem.Smartcard,
+                        Smartcard = Convert.ToInt64(firstItem.Smartcard, 16).ToString(),
                         SurName = firstItem.SurName,
                         Kilometers = x.Sum(c => c.Kilometers),
                         TotalTagIns = x.Sum(c => c.TotalTagIns)
@@ -108,18 +108,24 @@ namespace EBusValidator.Core
         {
             try
             {
+                if (!string.IsNullOrEmpty(smartcard)) smartcard = Convert.ToInt64(smartcard).ToString("X");
+
                 List<UsageHistoryModel> usageHistory = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
                                                         from sum in summary.DefaultIfEmpty()
-                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && t.CardEsn== smartcard
+                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && t.CardEsn == smartcard
                                                         select new UsageHistoryModel
                                                         {
+                                                            SurName = sum.Surname,
+                                                            FirstName = sum.Name,
                                                             Smartcard = t.CardEsn,
                                                             Action = t.Action,
                                                             Bus = t.BusNumber,
                                                             TransactionDate = t.TransactionDate,
                                                             Driver = ""
                                                         }).ToList();
+
+                usageHistory.ForEach(x => x.Smartcard = Convert.ToInt64(x.Smartcard, 16).ToString());
 
                 usageHistory.ForEach(x => { x.ActivityType = MapActionToActivityType(x.Action); x.Date = x.TransactionDate.ToShortDateString(); x.Time = x.TransactionDate.ToShortTimeString(); });
 
