@@ -6,7 +6,6 @@ using EBusValidator.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EBusValidator.Core
 {
@@ -44,7 +43,8 @@ namespace EBusValidator.Core
                     Status = x.Status ?? true,
                     Surname = x.Surname ?? string.Empty,
                     CardType = x.CardType ?? string.Empty,
-                    Number = x.Number ?? string.Empty
+                    AccountNumber = x.AccountNumber ?? string.Empty,
+                    Location = x.Location ?? string.Empty
                 }).ToList();
             }
             catch (Exception)
@@ -152,7 +152,8 @@ namespace EBusValidator.Core
                 Status = x.Status,
                 Surname = x.Surname,
                 CardType = x.CardType,
-                Number = x.Number
+                AccountNumber = x.AccountNumber,
+                Location = x.Location
             };
 
         }
@@ -169,7 +170,8 @@ namespace EBusValidator.Core
             y.Status = x.Status;
             y.Surname = x.Surname;
             y.CardType = x.CardType;
-            y.Number = x.Number;
+            y.AccountNumber = x.AccountNumber;
+            y.Location = x.Location;
         }
 
         public SmartcardModel MapSmartCardModel(Smartcard x)
@@ -187,7 +189,8 @@ namespace EBusValidator.Core
                 Status = x.Status ?? true,
                 Surname = x.Surname,
                 CardType = x.CardType,
-                Number = x.Number
+                AccountNumber = x.AccountNumber,
+                Location = x.Location
             };
         }
 

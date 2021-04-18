@@ -29,7 +29,8 @@ namespace EBusValidator.DataProvider
         public string Cellphone { get; set; }
         public string EmailAddress { get; set; }
         public string CardType { get; set; }
-        public string Number { get; set; }
+        public string AccountNumber { get; set; }
+        public string Location { get; set; }
         public string LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<bool> Status { get; set; }

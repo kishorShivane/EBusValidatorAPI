@@ -16,9 +16,12 @@ namespace EBusValidator.DataProvider
     {
         public int Id { get; set; }
         public System.DateTime Created { get; set; }
+        public System.DateTime Updated { get; set; }
+        public string DeviceSerial { get; set; }
         public int BusNumber { get; set; }
         public string CustomerCode { get; set; }
-        public string ApiToken { get; set; }
+        public string DeviceName { get; set; }
         public long LastUpdateEpoch { get; set; }
+        public int LastUpdateId { get; set; }
     }
 }

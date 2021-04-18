@@ -13,7 +13,7 @@ namespace EBusValidator.API.Controllers
 
         [Route("api/User/ValidateUser")]
         [HttpPost]
-        public UserModel ValidateUser([FromBody]UserModel user)
+        public UserModel ValidateUser([FromBody] UserModel user)
         {
             if (user.UserName.ToLower() == "admin" && user.Password.ToLower() == "admin")
             {

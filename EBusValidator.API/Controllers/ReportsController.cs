@@ -2,9 +2,6 @@
 using EBusValidator.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -30,11 +27,11 @@ namespace EBusValidator.API.Controllers
 
         [HttpPost]
         [Route("api/Reports/GetUsageSummaries")]
-        public async Task<List<UsageSummaryModel>> GetUsageSummaries([FromBody]SearchParams searchParams)
+        public async Task<List<UsageSummaryModel>> GetUsageSummaries([FromBody] SearchParams searchParams)
         {
             try
             {
-                return await Task.Run(() => service.GetUsageSummaries(searchParams.FromDate, searchParams.ToDate));
+                return await Task.Run(() => service.GetUsageSummaries(searchParams));
             }
             catch (Exception ex)
             {
@@ -45,11 +42,11 @@ namespace EBusValidator.API.Controllers
 
         [HttpPost]
         [Route("api/Reports/GetUsageHistory")]
-        public async Task<List<UsageHistoryModel>> GetUsageHistory([FromBody]SearchParams searchParams)
+        public async Task<List<UsageHistoryModel>> GetUsageHistory([FromBody] SearchParams searchParams)
         {
             try
             {
-                return await Task.Run(() => service.GetUsageHistory(searchParams.FromDate, searchParams.ToDate,searchParams.Smartcard));
+                return await Task.Run(() => service.GetUsageHistory(searchParams.FromDate, searchParams.ToDate, searchParams.Smartcard));
             }
             catch (Exception ex)
             {

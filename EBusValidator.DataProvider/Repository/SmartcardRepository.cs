@@ -6,7 +6,7 @@ namespace EBusValidator.DataProvider.Repository
 {
     public class SmartcardRepository : GenericRepository<Smartcard>, ISmartcardRepository
     {
-       
+
         public SmartcardRepository(IUnitOfWork<EBusValidatorContext> unitOfWork)
         : base(unitOfWork)
         {

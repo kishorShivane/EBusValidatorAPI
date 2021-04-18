@@ -1,8 +1,8 @@
+using EBusValidator.API.Areas.HelpPage.ModelDescriptions;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using EBusValidator.API.Areas.HelpPage.ModelDescriptions;
 
 namespace EBusValidator.API.Areas.HelpPage.Models
 {

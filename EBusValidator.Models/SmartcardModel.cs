@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EBusValidator.Models
 {
@@ -20,7 +17,8 @@ namespace EBusValidator.Models
         public string CardType { get; set; }
         public string CellPhone { get; set; }
         public string EMail { get; set; }
-        public string Number { get; set; }
+        public string AccountNumber { get; set; }
+        public string Location { get; set; }
         public List<GuardianModel> Guardians { get; set; }
         public string LastUpdatedBy { get; set; }
         public DateTime LastUpdatedDate { get; set; }

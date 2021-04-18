@@ -25,7 +25,6 @@ namespace EBusValidator.DataProvider
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<CardUpdate> CardUpdates { get; set; }
         public virtual DbSet<GpsTracking> GpsTrackings { get; set; }
         public virtual DbSet<Smartcard> Smartcards { get; set; }

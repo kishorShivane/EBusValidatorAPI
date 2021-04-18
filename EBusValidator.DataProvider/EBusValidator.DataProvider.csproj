@@ -62,9 +62,6 @@
     <Compile Include="CardUpdate.cs">
       <DependentUpon>EBusValidatorContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>EBusValidatorContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="EBusValidatorContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

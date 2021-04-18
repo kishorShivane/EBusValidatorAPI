@@ -1,8 +1,8 @@
+using EBusValidator.API.Areas.HelpPage.ModelDescriptions;
+using EBusValidator.API.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using EBusValidator.API.Areas.HelpPage.ModelDescriptions;
-using EBusValidator.API.Areas.HelpPage.Models;
 
 namespace EBusValidator.API.Areas.HelpPage.Controllers
 {

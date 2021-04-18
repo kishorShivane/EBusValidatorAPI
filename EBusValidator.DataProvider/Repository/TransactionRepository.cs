@@ -8,7 +8,7 @@ namespace EBusValidator.DataProvider.Repository
 {
     public class TransactionRepository : GenericRepository<Transaction>, ITransactionRepository
     {
-       
+
         public TransactionRepository(IUnitOfWork<EBusValidatorContext> unitOfWork)
         : base(unitOfWork)
         {

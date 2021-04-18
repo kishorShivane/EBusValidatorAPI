@@ -65,19 +65,29 @@ namespace EBusValidator.Core
             }
         }
 
-        public List<UsageSummaryModel> GetUsageSummaries(DateTime fromDate, DateTime toDate)
+        public List<UsageSummaryModel> GetUsageSummaries(SearchParams searchParams)
         {
             try
             {
+                List<int> actions = new List<int> { 1, 11, 12, 253 };
+                if (searchParams != null && !string.IsNullOrEmpty(searchParams.DriverNumber))
+                {
+                    searchParams.DriverNumber = string.Format("{0:x}", searchParams.DriverNumber);
+                }
+
                 List<UsageSummaryModel> usageSummaryList = new List<UsageSummaryModel>();
                 List<UsageSummaryModel> usageSummary = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
-                                                        from sum in summary.DefaultIfEmpty()
-                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && t.Action == 1
+                                                        from sum in summary
+                                                        where t.TransactionDate >= searchParams.FromDate && t.TransactionDate <= searchParams.ToDate && actions.Contains(t.Action) &&
+                                                        (searchParams.BusNumber == 0 || t.BusNumber == searchParams.BusNumber) &&
+                                                        (string.IsNullOrEmpty(searchParams.DriverNumber) || (sum.CardType == "Driver" && t.CardEsn == searchParams.DriverNumber))
                                                         select new UsageSummaryModel
                                                         {
                                                             FirstName = sum.Name,
                                                             SurName = sum.Surname,
+                                                            AccountNumber = sum.AccountNumber,
+                                                            Location = sum.Location,
                                                             Kilometers = 0,
                                                             Smartcard = t.CardEsn,
                                                             TotalTagIns = t.Action
@@ -91,6 +101,8 @@ namespace EBusValidator.Core
                         FirstName = firstItem.FirstName,
                         Smartcard = Convert.ToInt64(firstItem.Smartcard, 16).ToString(),
                         SurName = firstItem.SurName,
+                        Location = firstItem.Location,
+                        AccountNumber = firstItem.AccountNumber,
                         Kilometers = x.Sum(c => c.Kilometers),
                         TotalTagIns = x.Sum(c => c.TotalTagIns)
                     });
@@ -112,12 +124,14 @@ namespace EBusValidator.Core
 
                 List<UsageHistoryModel> usageHistory = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
-                                                        from sum in summary.DefaultIfEmpty()
+                                                        from sum in summary
                                                         where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && t.CardEsn == smartcard
                                                         select new UsageHistoryModel
                                                         {
                                                             SurName = sum.Surname,
                                                             FirstName = sum.Name,
+                                                            AccountNumber = sum.AccountNumber,
+                                                            Location = sum.Location,
                                                             Smartcard = t.CardEsn,
                                                             Action = t.Action,
                                                             Bus = t.BusNumber,

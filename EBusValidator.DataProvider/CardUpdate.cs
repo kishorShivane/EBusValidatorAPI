@@ -22,5 +22,6 @@ namespace EBusValidator.DataProvider
         public string CustomerCode { get; set; }
         public int Status { get; set; }
         public string Expiry { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }
