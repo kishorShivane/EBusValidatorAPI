@@ -125,7 +125,7 @@ namespace EBusValidator.Core
                 List<UsageHistoryModel> usageHistory = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
                                                         from sum in summary
-                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && t.CardEsn == smartcard
+                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && (t.CardEsn == smartcard || string.IsNullOrEmpty(smartcard))
                                                         select new UsageHistoryModel
                                                         {
                                                             SurName = sum.Surname,
