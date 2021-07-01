@@ -5,6 +5,8 @@ using EBusValidator.Logger;
 using EBusValidator.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 
 namespace EBusValidator.Core
@@ -78,8 +80,8 @@ namespace EBusValidator.Core
                 List<UsageSummaryModel> usageSummaryList = new List<UsageSummaryModel>();
                 List<UsageSummaryModel> usageSummary = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
-                                                        from sum in summary
-                                                        where t.TransactionDate >= searchParams.FromDate && t.TransactionDate <= searchParams.ToDate && actions.Contains(t.Action) &&
+                                                        from sum in summary.DefaultIfEmpty()
+                                                        where DbFunctions.TruncateTime(t.TransactionDate) >= DbFunctions.TruncateTime(searchParams.FromDate) && DbFunctions.TruncateTime(t.TransactionDate) <= DbFunctions.TruncateTime(searchParams.ToDate) && //actions.Contains(t.Action) &&
                                                         (searchParams.BusNumber == 0 || t.BusNumber == searchParams.BusNumber) &&
                                                         (string.IsNullOrEmpty(searchParams.DriverNumber) || (sum.CardType == "Driver" && t.CardEsn == searchParams.DriverNumber))
                                                         select new UsageSummaryModel
@@ -89,8 +91,7 @@ namespace EBusValidator.Core
                                                             AccountNumber = sum.AccountNumber,
                                                             Location = sum.Location,
                                                             Kilometers = 0,
-                                                            Smartcard = t.CardEsn,
-                                                            TotalTagIns = t.Action
+                                                            Smartcard = t.CardEsn
                                                         }).ToList();
 
                 usageSummary.GroupBy(x => x.Smartcard).ToList().ForEach(x =>
@@ -99,12 +100,12 @@ namespace EBusValidator.Core
                     usageSummaryList.Add(new UsageSummaryModel()
                     {
                         FirstName = firstItem.FirstName,
-                        Smartcard = Convert.ToInt64(firstItem.Smartcard, 16).ToString(),
+                        Smartcard = !string.IsNullOrEmpty(firstItem.Smartcard)?Convert.ToInt64(firstItem.Smartcard, 16).ToString(): string.Empty,
                         SurName = firstItem.SurName,
                         Location = firstItem.Location,
                         AccountNumber = firstItem.AccountNumber,
                         Kilometers = x.Sum(c => c.Kilometers),
-                        TotalTagIns = x.Sum(c => c.TotalTagIns)
+                        TotalTagIns = x.Count()
                     });
                 });
 
@@ -124,8 +125,8 @@ namespace EBusValidator.Core
 
                 List<UsageHistoryModel> usageHistory = (from t in transRepo.Table
                                                         join s in smartcardRepo.Table on t.CardEsn equals s.ESN into summary
-                                                        from sum in summary
-                                                        where t.TransactionDate >= fromDate && t.TransactionDate <= toDate && (t.CardEsn == smartcard || string.IsNullOrEmpty(smartcard))
+                                                        from sum in summary.DefaultIfEmpty()
+                                                        where DbFunctions.TruncateTime(t.TransactionDate) >= DbFunctions.TruncateTime(fromDate) && DbFunctions.TruncateTime(t.TransactionDate) <= DbFunctions.TruncateTime(toDate) && (t.CardEsn == smartcard || string.IsNullOrEmpty(smartcard))
                                                         select new UsageHistoryModel
                                                         {
                                                             SurName = sum.Surname,
@@ -139,11 +140,11 @@ namespace EBusValidator.Core
                                                             Driver = ""
                                                         }).ToList();
 
-                usageHistory.ForEach(x => x.Smartcard = Convert.ToInt64(x.Smartcard, 16).ToString());
+                usageHistory.ForEach(x => { if(!string.IsNullOrEmpty(x.Smartcard)) x.Smartcard = Convert.ToInt64(x.Smartcard, 16).ToString(); });
 
                 usageHistory.ForEach(x => { x.ActivityType = MapActionToActivityType(x.Action); x.Date = x.TransactionDate.ToShortDateString(); x.Time = x.TransactionDate.ToShortTimeString(); });
 
-                return usageHistory;
+                return usageHistory.OrderByDescending(x=>x.Date).ThenBy(x=>x.Time).ToList();
             }
             catch (Exception)
             {

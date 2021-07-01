@@ -149,6 +149,7 @@ namespace EBusValidator.Core
                 LastUpdatedDate = DateTime.Now,
                 Name = x.Name,
                 SmartcardNumber = x.SmartcardNumber,
+                ESN = int.Parse(x.SmartcardNumber, System.Globalization.NumberStyles.HexNumber).ToString(),
                 Status = x.Status,
                 Surname = x.Surname,
                 CardType = x.CardType,
